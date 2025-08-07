@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Virtual Movie Date 🍿🎦</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to right, #fffefb, #fdf7f1);
+      color: #4a3c2f;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #ffffffd9;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+      transition: all 0.5s ease-in-out;
+      position: relative;
+      z-index: 10;
+    }
+    h1 {
+      color: #c59b61;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    .gif img {
+      width: 180px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    .question, .movie-list, .final-form, .goodbye {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+      display: none;
+    }
+    .visible {
+      display: block;
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    .movie {
+      background: #fef6e4;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.03);
+      text-align: left;
+    }
+    .movie h3 {
+      margin: 0;
+      color: #b08644;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    select, input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #d8cfc3;
+      font-size: 1em;
+    }
+    button {
+      background-color: #f4ca59;
+      color: #4a3c2f;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 10px 5px 0;
+      border: none;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #eac340;
+    }
+    form { text-align: left; }
+    .sparkle-text {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #b8903b;
+      animation: pulseGlow 1.5s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { text-shadow: 0 0 5px #ffeebf, 0 0 10px #fcd770; }
+      50% { text-shadow: 0 0 10px #ffdf80, 0 0 20px #ffcb00; }
+    }
+    .star {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: #fff6d6;
+      border-radius: 50%;
+      animation: floatStar 8s linear infinite;
+      z-index: 1;
+    }
+    @keyframes floatStar {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: #f4ca59;
+      opacity: 0.8;
+      animation: fall 3s linear forwards;
+      z-index: 100;
+    }
+    @keyframes fall {
+      to { transform: translateY(100vh) rotateZ(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+<script>
+  for (let i = 0; i < 30; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    star.style.left = `${Math.random() * 100}vw`;
+    star.style.top = `${Math.random() * 100}vh`;
+    star.style.animationDuration = `${4 + Math.random() * 4}s`;
+    star.style.opacity = Math.random();
+    document.body.appendChild(star);
+  }
+</script>
+
+<div class="container">
+  <audio id="ding" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1b3a9e4c90.mp3?filename=pop-94319.mp3" preload="auto"></audio>
+  <div class="gif">
+    <img src="https://media.giphy.com/media/QvBoMEcQ7DQXK/giphy.gif" alt="Cute gif" />
+  </div>
+  <h1>Movie Date Night with You, Papi 💛</h1>
+
+  <div class="question visible" id="step1">
+    <p>Hi Papi 😚 Would you like to have a cozy movie night with me this Friday (Mexico time)?</p>
+    <button onclick="nextStep('step2')">Yes 🧡</button>
+    <button onclick="nextStep('step2')">Yes (of course!) 🌟</button>
+  </div>
+
+  <div class="movie-list" id="step2">
+    <p class="sparkle-text">✨ Yaaay! Choose what you'd like to watch from these sweet options ✨</p>
+    <div class="movie"><h3>1. IRL (2019)</h3><p>A contemporary drama exploring online dating—joys, loneliness, and the real search for connection in a hyper-connected world.</p></div>
+    <div class="movie"><h3>2. Tie the Knot (2016)</h3><p>A heartfelt cross-cultural musical-romance. An overworked American escapes to Mumbai and finds friendship, chaos, and love.</p></div>
+    <div class="movie"><h3>3. ARC: A Love Story (2016)</h3><p>An indie story of friendship, infidelity, and emotional risk. Ben and Naomi’s bond deepens amid blurred boundaries.</p></div>
+    <div class="movie"><h3>4. Ben & Ara (2015)</h3><p>A passionate romance between a PhD student and a devout Muslim. It explores love across beliefs—honest, raw, and brave.</p></div>
+    <button onclick="goBack('step1')">⬅️ Back</button>
+    <button onclick="nextStep('step3')">Next 👉</button>
+  </div>
+
+  <div class="final-form" id="step3">
+    <form action="https://formsubmit.co/glarissabuanhug@gmail.com" method="POST" target="_blank" onsubmit="launchConfetti(); nextStep('goodbye')">
+      <input type="hidden" name="_subject" value="Movie Date RSVP from Papi 💛">
+      <input type="hidden" name="_captcha" value="false">
+      <label for="movieChoice">Which one do you want to watch, baby? 💘</label>
+      <select id="movieChoice" name="Movie Choice">
+        <option value="IRL (2019)">IRL (2019)</option>
+        <option value="Tie the Knot (2016)">Tie the Knot (2016)</option>
+        <option value="ARC: A Love Story (2016)">ARC: A Love Story (2016)</option>
+        <option value="Ben & Ara (2015)">Ben & Ara (2015)</option>
+        <option value="suggestion">I have another suggestion 😏</option>
+      </select>
+      <label for="time">What time are you free Friday night (Mexico Time)? ⏰</label>
+      <input type="time" id="time" name="Time Available" required>
+      <label for="msg">Anything you want to say? 🥺👉👈</label>
+      <textarea id="msg" name="Message" rows="4" placeholder="Tell me anything..."></textarea>
+      <button type="button" onclick="goBack('step2')">⬅️ Back</button>
+      <button type="submit">Send 💌</button>
+    </form>
+  </div>
+
+  <div class="goodbye" id="goodbye">
+    <h2>Thank you and see yah, Papi! 🥰</h2>
+    <p>I can't wait to spend Friday night with you.<br>I'll send the invite soon. You're my favorite movie partner 🍿✨</p>
+  </div>
+</div>
+
+<script>
+  function nextStep(stepId) {
+    document.getElementById('ding').play();
+    ['step1', 'step2', 'step3', 'goodbye'].forEach(id => {
+      document.getElementById(id)?.classList.remove('visible');
+    });
+    setTimeout(() => {
+      document.getElementById(stepId).classList.add('visible');
+    }, 100);
+  }
+
+  function goBack(stepId) {
+    document.getElementById('ding').play();
+    ['step1', 'step2', 'step3', 'goodbye'].forEach(id => {
+      document.getElementById(id)?.classList.remove('visible');
+    });
+    setTimeout(() => {
+      document.getElementById(stepId).classList.add('visible');
+    }, 100);
+  }
+
+  function launchConfetti() {
+    for (let i = 0; i < 40; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = `${Math.random() * 100}vw`;
+      confetti.style.top = `${Math.random() * 10}vh`;
+      confetti.style.backgroundColor = ['#f4ca59', '#fff3b0', '#fde68a'][Math.floor(Math.random() * 3)];
+      confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+      confetti.style.animationDuration = `${2 + Math.random() * 2}s`;
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 4000);
+    }
+  }
+</script>
+</body>
+</html>
